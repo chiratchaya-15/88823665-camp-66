@@ -1,0 +1,32 @@
+/* mystyle.css */
+ul{
+    list-style-type: disc;
+    list-style: circle inside url();
+}
+h1 {
+    font-size: 16pt;
+    color: rgb(218, 82, 112);
+}
+้h1.myh1{
+    font-size: 25pt;
+    margin: 25px;
+    padding: 10px 50px 20px 50px;
+    border: 5px solid rgb(91, 37, 43);
+    border-radius:  50%;
+}
+h1:hover{
+    background-color: rgb(36, 130, 119);
+}
+ 
+body {
+    font-family: 'Trirong';
+    background-color: rgb(225, 212, 194);
+
+}
+button [type = "submit"]{
+    padding: 20px;
+    width: 10%;
+    background-color: black;
+    border: 1px solid white;
+    cursor: pointer;
+}
