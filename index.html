@@ -3,87 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workshop #HTML - FORM</title>
-    <style>
-        label {
-            display: inline-block;
-            width: 150px;  /* กำหนดความกว้างของ label */
-        }
-        form div {
-            margin-bottom: 10px;  /* เพิ่มระยะห่างระหว่างบรรทัด */
-        }
-    </style>
+    <title>Bootstrap Form Layout</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Workshop #HTML - FORM</h1>
-    <form action="#" method="post">
-        <div>
-            <label for="fname">ชื่อ:</label>
-            <input type="text" id="fname" name="fname">
+<div class="container mt-5">
+    <form>
+        <!-- ชื่อ -->
+        <div class="row mb-3">
+            <label for="firstName" class="col-sm-2 col-form-label">ชื่อ <span class="text-danger"></span></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstName" placeholder="ชื่อ">
+            </div>
         </div>
-        
-        <div>
-            <label for="lname">สกุล:</label>
-            <input type="text" id="lname" name="lname">
+
+        <!-- นามสกุล -->
+        <div class="row mb-3">
+            <label for="lastName" class="col-sm-2 col-form-label">สกุล</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lastName" placeholder="นามสกุล">
+            </div>
         </div>
-        
-        <div>
-            <label for="dob">วัน/เดือน/ปีเกิด:</label>
-            <input type="date" id="dob" name="dob">
+
+        <!-- วัน/เดือน/ปีเกิด -->
+        <div class="row mb-3">
+            <label for="dob" class="col-sm-2 col-form-label">วัน/เดือน/ปีเกิด</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="dob">
+            </div>
         </div>
-        
-        <div>
-            <label for="age">อายุ:</label>
-            <input type="number" id="age" name="age">
+
+        <!-- อายุ -->
+        <div class="row mb-3">
+            <label for="age" class="col-sm-2 col-form-label">อายุ</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="age" placeholder="อายุ">
+            </div>
         </div>
-        
-        <div>
-            <label>เพศ:</label>
-            <input type="radio" id="male" name="gender" value="male">
-            <label for="male">ชาย</label>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">หญิง</label>
+
+        <!-- เพศ -->
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">เพศ</label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="ชาย">
+                    <label class="form-check-label" for="male">ชาย</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="หญิง">
+                    <label class="form-check-label" for="female">หญิง</label>
+                </div>
+            </div>
         </div>
-        
-        <div>
-            <label for="file">รูป:</label>
-            <input type="file" id="file" name="file">
+
+        <!-- อัปโหลดรูป -->
+        <div class="row mb-3">
+            <label for="formFile" class="col-sm-2 col-form-label">รูป</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile">
+            </div>
         </div>
-        
-        <div>
-            <label for="address">ที่อยู่:</label>
-            <textarea id="address" name="address" rows="5" cols="30"></textarea>
+
+        <!-- ที่อยู่ -->
+        <div class="row mb-3">
+            <label for="address" class="col-sm-2 col-form-label">ที่อยู่</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="address" rows="3"></textarea>
+            </div>
         </div>
-        
-        <div>
-            <label for="color">สีที่ชอบ:</label>
-            <select id="color" name="color">
-                <option value="red">สีแดง</option>
-                <option value="blue">สีน้ำเงิน</option>
-                <option value="green">สีเขียว</option>
-                <option value="yellow">สีเหลือง</option>
-            </select>
+
+        <!-- สีที่ชอบ -->
+        <div class="row mb-3">
+            <label for="favoriteColor" class="col-sm-2 col-form-label">สีที่ชอบ</label>
+            <div class="col-sm-10">
+                <select id="color" class="form-select" custom-input required>
+                <option value="สีแดง">red</option>
+                <option value="สีเขียว">green</option>
+                <option value="สีดำ">Black</option>
+                <option value="สีม่วง">Purple</option>
+                <option value="สีเงิน">Silver</option>
+                </select>
+            </div>
         </div>
-        
-        <div>
-            <label>แนวเพลงที่ชอบ:</label>
-            <input type="radio" id="pop" name="music" value="pop">
-            <label for="pop">เพื่อชีวิต</label>
-            <input type="radio" id="lukthung" name="music" value="lukthung">
-            <label for="lukthung">ลูกทุ่ง</label>
-            <input type="radio" id="other" name="music" value="other">
-            <label for="other">อื่นๆ</label>
+
+        <!-- เพลงที่ชอบ -->
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">เพลงที่ชอบ</label>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="music" id="song1" value="เพื่อชีวิต">
+                    <label class="form-check-label" for="song1">เพื่อชีวิต</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="music" id="song2" value="ลูกทุ่ง">
+                    <label class="form-check-label" for="song2">ลูกทุ่ง</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="music" id="song3" value="อื่นๆ">
+                    <label class="form-check-label" for="song3">อื่นๆ</label>
+                </div>
+            </div>
         </div>
-        
-        <div>
-            <input type="checkbox" id="consent" name="consent" value="agree">
-            <label for="consent">ยินยอมให้เก็บข้อมูล</label>
+
+        <!-- ยอมรับการเก็บข้อมูล -->
+        <div class="row mb-3">
+            <div class="col-6 d-flex">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dataConsent">
+                    <label class="form-check-label" for="dataConsent">ยินยอมให้เก็บข้อมูล</label>
+                </div>
+            </div>
         </div>
-        
-        <div>
-            <input type="reset" value="Reset">
-            <input type="submit" value="Submit">
+
+        <!-- ปุ่ม Submit และ Reset -->
+        <div class="row mb-3">
+            <div class="col-6 d-flex">
+                <!-- ปุ่ม Reset ชิดซ้าย -->
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <!-- ปุ่ม Submit ชิดขวา -->
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
         </div>
-    </form>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
