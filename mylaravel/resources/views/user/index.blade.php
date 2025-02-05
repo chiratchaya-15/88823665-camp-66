@@ -23,8 +23,15 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    <button class="btn btn-warning">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <a href="{{url('/user/'.$user->id)}}">
+                        <button class="btn btn-warning">Edit</button>
+                    </a>
+                    <form action="{{ url('/user') }}" method="post" style="display: inline;">
+                        @csrf
+                        @method('delete')
+                        <input type="hidden" name="id" value="{{ $user->id }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
               </tr>
               <?php } ?>

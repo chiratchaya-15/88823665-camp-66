@@ -1,45 +1,47 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\mycontroller;
-use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\MyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
-Route::get('/mycontroller/{id?}', [MyController::class, 'myfunction']);
+Route::get('/login',
+[LoginController::class, 'index']);
 
-Route::post('/mycontroller/{id?}',
-[MyController::class, 'myfunction']);
+Route::get('/register',
+[RegisterController::class, 'index']);
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/home',
+[HomeController::class, 'index']);
 
-Route::get('hello/{id}?',
-function ($val="") {
-    return "<h1>Hello Word $val<h1>";
-}
-);
+Route::get('/',
+[HomeController::class, 'index']);
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route :: post('/register',
+[RegisterController::class, 'create']);
 
-Route::post('/register', [RegisterController::class, 'create']);
-Route::get('/mycontroller',[MyController::class, 'index']); //ใช้แสดงฟอร์ม
-Route::get('/user/{id}',[UserController::class, 'edit']);
-Route::put('/user',[UserController::class, 'edit_action']);
-Route::delete('/user',[UserController::class, 'edit_action']);
+Route :: get('/users',
+[UserController::class, 'index']);
+Route :: get('/user/{id}',
+[UserController::class, 'edit']);
+Route :: put('/user',
+[UserController::class, 'edit_action']);
+Route::delete('/user',
+[UserController::class, 'delete']);
 
-Route::get('/mycontroller',[MyController::class, 'myfunction']);//ส่งข้อมูลขากฟอร์ม
-Route::post('/mycontroller',[MyController::class, 'myfunction']);
-
-Route::get('/404', function() {
+Route::get('/404', function(){
     abort(404);
 });
 
-Route::get('/500', function() {
+Route::get('/500', function(){
     abort(500);
 });
+
+Route::get('/mycontroller/{id?}',
+[MyController::class,'myfunction']);
+
+Route::post('/mycontroller/{id?}',
+[MyController::class,'myfunction']);
