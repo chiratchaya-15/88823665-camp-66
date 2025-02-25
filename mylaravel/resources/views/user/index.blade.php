@@ -1,8 +1,10 @@
 @extends('layouts.default_with_menu')
+
 @section('content')
 <div class="row">
+  <h1>{{session('user')->name}}</h1>
     <div class="col-md-12">
-      <div class="mb-12 card">
+      <div class="card mb-12">
         <div class="card-header"><h3 class="card-title"></h3></div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -16,30 +18,34 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($users as $index => $user)
+             <?php foreach ($users as $index => $user) { ?>
               <tr class="align-middle">
                 <td>{{ $index+1 }}.</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                  <a href="{{ url('/user/'.$user->id)}}">
-                    <button class="btn btn-warning">Edit</button>
-                  </a>
-                  <form action="{{ url('/user') }}" method="post" class="delete-form" style="display: inline;">
-                    @csrf
-                    @method('delete')
-                    <input type="hidden" name="id" value="{{ $user->id }}">
-                    <button type="button" class="btn btn-danger delete-btn" data-id="{{ $user->id }}">Delete</button>
-                  </form>
+                    <a href="{{ url('/user/'.$user->id)}}">
+                        <button class="btn btn-warning">Edit</button>
+                    </a>
+                    {{-- <form action="{{ url('/user') }}" method="post" style="display: inline;"> --}}
+                    <form id="delete-form-{{ $user->id }}" action="{{ url('/user') }}" method="post" style="display: inline;">
+                        @csrf
+                        @method('delete')
+                        <input type="hidden" name="id" value="{{ $user->id }}" >
+                        {{-- <button type="submit" class="btn btn-danger">Delete</button> --}}
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $user->id }})">Delete</button>
+                    </form>
+
+
                 </td>
               </tr>
-              @endforeach
+              <?php } ?>
             </tbody>
           </table>
         </div>
         <!-- /.card-body -->
-        <div class="clearfix card-footer">
-          <ul class="m-0 pagination pagination-sm float-end">
+        <div class="card-footer clearfix">
+          <ul class="pagination pagination-sm m-0 float-end">
             <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -48,34 +54,51 @@
           </ul>
         </div>
       </div>
+      <!-- /.card -->
+
     </div>
 </div>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".delete-btn").forEach(button => {
-        button.addEventListener("click", function () {
-            const form = this.closest("form"); // ดึง form ที่ใกล้ที่สุด
-            const userId = this.getAttribute("data-id");
-
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); // ส่งฟอร์มลบข้อมูล
-                }
-            });
-        });
+    function confirmDelete(userId) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success mx-2",
+            cancelButton: "btn btn-danger mx-2"
+        },
+        buttonsStyling: false
     });
-});
+
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // ลบข้อมูล
+            document.getElementById('delete-form-' + userId).submit();
+
+            // แสดง SweetAlert ว่าลบสำเร็จ
+            swalWithBootstrapButtons.fire({
+                title: "Deleted!",
+                text: "Your User has been deleted.",
+                icon: "success"
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your User is safe.",
+                icon: "error"
+            });
+        }
+    });
+}
+
 </script>
 @endsection

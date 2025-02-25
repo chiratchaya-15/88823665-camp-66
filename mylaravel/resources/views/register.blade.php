@@ -131,7 +131,7 @@
         if (!mycheckbox.is(':checked')) {
             alert("คุณต้องยอมรับเงื่อนไขก่อน");
             isValid = false;
-        }
+        }.
 
         return isValid;
     }
